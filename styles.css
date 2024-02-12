@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.frame {
+    border: 30px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background-color: black;
+}
+
+.display {
+    border: 1px solid white;
+    justify-content: end;
+    display: flex;
+    font-size: 48px;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.onetwothree, .fourfivesix, .seveneightnine, .zeroplusminus, .xdivideequals, .decimalbackspaceclear {
+    display: flex;
+    gap: 50px;
+}
+
+button {
+    font-size: 40px;
+    padding: 12px 0;
+    width: 100px;
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+}
+
+.backspace, .clear {
+    font-size: 28px;
+}
