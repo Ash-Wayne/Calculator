@@ -10,6 +10,7 @@ let firstTimeOperatorUse = true;
 const displayText = document.querySelector('.display');
 const numberBtns = document.querySelectorAll('.numbers');
 const operatorBtns = document.querySelectorAll('.operators');
+const decimalBtn = document.querySelector('.decimal');
 const equalsBtn = document.querySelector('.equals');
 const backspaceBtn = document.querySelector('.backspace');
 const clearBtn = document.querySelector('.clear');
@@ -28,6 +29,8 @@ function operate(num1, num2, operator) {
         case '/':
             return divide(num1, num2);
             break;
+        case '=':
+
     }
 }
 
@@ -91,7 +94,8 @@ function addOperatorToExpression(operatorSign) {
 }
 
 function evaluate() {
-    displayResults();
+    // exit function if validity checks from displayResults() fails
+    if (displayResults() == false) return;
     operator = '=';
     firstTimeOperatorUse = true;
 }
@@ -103,10 +107,9 @@ function performValidityChecks() {
         return false;
     } else if (display != '') {
         num2 = Number(display); // assign display to num2 if display isn't empty
-        return true;
     }
 
-    if (num1.toString() == '' || num2.toString() == '' || operator == '') {
+    if (num1.toString() == '' || num2.toString() == '' || operator == '' || operator == '=') {
         alert('You have not entered a valid expression to evaluate.');
         clear();
         return false;
@@ -139,9 +142,9 @@ function displayWatcher(mutations) {
     for (let mutation of mutations) {
         if (mutation.type === 'childList') {
             if (displayText.textContent.includes('.')) {
-                decimal.disabled = true;
+                decimalBtn.disabled = true;
             } else {
-                decimal.disabled = false;
+                decimalBtn.disabled = false;
             }
         }
     }
@@ -180,7 +183,7 @@ function handleKeyboardInput(e) {
     if (e.key >= 0 && e.key <= 9) displayOnScreen(e.key);
     if (e.key == '+' || e.key == '-' || e.key == 'x' || e.key == '/') addOperatorToExpression(e.key);
     if (e.key == '.') {             
-        if (decimal.disabled) {
+        if (decimalBtn.disabled) {
             alert('You cannot add multiple decimals to a number.');
             return;
         }
